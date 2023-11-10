@@ -6,6 +6,12 @@ from io import BytesIO
 import paramiko
 from tkterm import Terminal
 from test import *
+from atk3 import attack3
+from atk2 import attack2
+from atk1 import attack1
+from def1 import def_attack1
+from def2 import def_attack2
+from def3 import def_attack3
 #from pycomm.ab_comm import LogixDriver
 
 
@@ -66,50 +72,21 @@ frame_id = canvas.create_window((4, 4), window=frame, anchor="nw")
 canvas.bind("<Configure>", on_frame_configure)
 
 # Columna de botones a la izquierda
-def def_attack1():
-    messageWindow = Toplevel(main_screen)
-    messageWindow.title("Defensa de ataque 1")
-    messageWindow.geometry("860x560")
-    Label(messageWindow, text="Esta es la defensa del ataque 1").pack()
-    main_screen.withdraw()
+def def_attack1_wrapper():
+    def_attack1(main_screen)
 
-    def on_closing():
-        messageWindow.destroy()
-        main_screen.deiconify()
-
-    messageWindow.protocol("WM_DELETE_WINDOW", on_closing)
-defattack1 = tk.Button(frame, text="Defender ataque 1", bg="black", fg="white", command= def_attack1)
+defattack1 = tk.Button(frame, text="Defender ataque 1", bg="black", fg="white", command= def_attack1_wrapper)
 defattack1.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
-def def_attack2():
-    messageWindow = Toplevel(main_screen)
-    messageWindow.title("Defensa de ataque 2")
-    messageWindow.geometry("860x560")
-    Label(messageWindow, text="Esta es la defensa del ataqu 2").pack()
-    main_screen.withdraw()
+def def_attack2_wrapper():
+    def_attack2(main_screen)
 
-    def on_closing():
-        messageWindow.destroy()
-        main_screen.deiconify()
-
-    messageWindow.protocol("WM_DELETE_WINDOW", on_closing)
-
-defattack2 = tk.Button(frame, text="Defender ataque 2", bg="black", fg="white", command= def_attack2)
+defattack2 = tk.Button(frame, text="Defender ataque 2", bg="black", fg="white", command= def_attack2_wrapper)
 defattack2.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
 
-def def_attack3():
-    messageWindow = Toplevel(main_screen)
-    messageWindow.title("Defensa de ataque 3")
-    messageWindow.geometry("860x560")
-    Label(messageWindow, text="Esta es la defensa del ataque 3").pack()
-    main_screen.withdraw()
-
-    def on_closing():
-        messageWindow.destroy()
-        main_screen.deiconify()
-
-    messageWindow.protocol("WM_DELETE_WINDOW", on_closing)
-defattack3 = tk.Button(frame, text="Defender ataque 3", bg="black", fg="white", command= def_attack3)
+def def_attack3_wrapper():
+    def_attack3(main_screen)
+defattack3 = tk.Button(frame, text="Defender ataque 3", bg="black", fg="white", command= def_attack3_wrapper)
 defattack3.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
 
 reset = tk.Button(frame, text="reiniciar", bg="black", fg="white")
@@ -122,90 +99,23 @@ image_label.grid(row=0, column=1, rowspan=4, padx=10, pady=10, sticky="nsew")
 
 
 # Columna de botones a la derecha
-def attack1():
-    messageWindow = Toplevel(main_screen)
-    messageWindow.title("Ataque nivel 1")
-    #messageWindow.geometry("860x560")
-    #permite pantalla fullscreen
-    messageWindow.attributes('-fullscreen', True)
-    messageWindow.config(background="black")
-    tit = Label(messageWindow, text="Este es el ataque de nivel 1", font="Helvetica 20 bold", bg="black", fg="white")
-    tit.pack(pady=50)
-    sub = Label(messageWindow, text="Listado de directorio", font="Helvetica 20", bg="black", fg="white")
-    sub.pack(side=TOP)
 
-    #Descomentar para agregar boton si no pasa ssh
-    #Regresar a menu principal
-    btn_back= Button(messageWindow, text="Regresar", font=12, height=4, width=30,bg="black", fg="white", command=lambda: main_screen.tkraise()).pack()
-    btn_back.grid(row=0, column=1,padx=10, pady=10, sticky="nsew")
+def attack1_wrapper():
+    attack1(main_screen, ip, user, password, comm)
 
-
-    #Conexion ssh
-    client = paramiko.client.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(ip, username=user, password=password)
-    #Se ejecuta comando
-    _stdin, _stdout,_stderr = client.exec_command("ls")
-    #print(_stdout.read().decode())
-    string = str(_stdout.read().decode())
-    #print(type(string))
-    t = Label(messageWindow, text=string, bg="black", fg="white", font="Helvetica 12")
-    t.pack(side=TOP)
-    client.close()
-
-
-###### Conexion a PLC
-    """  with LogixDriver('192.168.1.1') as plc:
-        plc.open()
-        if plc.read_tag('Tag1'):
-            print('Lectura exitosa')
-        plc.close() """
-
-    ###### Botones
-    #Regresar a menu principal
-    btn_back= Button(messageWindow, text="Regresar", font=12, height=4, width=30,bg="black", fg="white", command=lambda: main_screen.tkraise()).pack()
-    btn_back.grid(row=0,column=1,padx=10, pady=10, sticky="nsew")
-    
-    main_screen.withdraw()
-
-    def on_closing():
-        messageWindow.destroy()
-        main_screen.deiconify()
-    messageWindow.protocol("WM_DELETE_WINDOW", on_closing)
-
-atk1 = tk.Button(frame, text="Prueba de ataque 1", bg="black", fg="white", command=attack1)
+atk1 = tk.Button(frame, text="Prueba de ataque 1", bg="black", fg="white", command=attack1_wrapper)
 atk1.grid(row=0, column=2, padx=10, pady=10, sticky="nsew")
 
-def attack2():
-    messageWindow = Toplevel(main_screen)
-    messageWindow.title("Ataque nivel 2")
-    messageWindow.geometry("860x560")
-    Label(messageWindow, text="Este es el ataque de nivel 2").pack()
-    main_screen.withdraw()
+def attack2_wrapper():
+    attack2(main_screen)
 
-    def on_closing():
-        messageWindow.destroy()
-        main_screen.deiconify()
-
-    messageWindow.protocol("WM_DELETE_WINDOW", on_closing)
-
-atk2 = tk.Button(frame, text="prueba de ataque 2", bg="black", fg="white", command=attack2)
+atk2 = tk.Button(frame, text="prueba de ataque 2", bg="black", fg="white", command=attack2_wrapper)
 atk2.grid(row=1, column=2, padx=10, pady=10, sticky="nsew")
 
-def attack3():
-    messageWindow = Toplevel(main_screen)
-    messageWindow.title("Ataque nivel 3")
-    messageWindow.geometry("860x560")
-    Label(messageWindow, text="Este is el ataque de nivel 3").pack()
-    main_screen.withdraw()
+def attack3_wrapper():
+    attack3(main_screen, user, password, ip)
 
-    def on_closing():
-        messageWindow.destroy()
-        main_screen.deiconify()
-
-    messageWindow.protocol("WM_DELETE_WINDOW", on_closing)
-
-atk3 = tk.Button(frame, text="prueba de ataque 3", bg="black", fg="white", command=attack3)
+atk3 = tk.Button(frame, text="prueba de ataque 3", bg="black", fg="white", command=attack3_wrapper)
 atk3.grid(row=2, column=2, padx=10, pady=10, sticky="nsew")
 
 def done():
