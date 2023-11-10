@@ -10,10 +10,10 @@ def attack1(main_screen, ip, user, password, comm):
     #messageWindow.geometry("860x560")
     #permite pantalla fullscreen
     messageWindow.attributes('-fullscreen', True)
-    messageWindow.config(background="black")
-    tit = Label(messageWindow, text="Este es el ataque de nivel 1", font="Helvetica 20 bold", bg="black", fg="white")
+    messageWindow.config(background="#65707F")
+    tit = Label(messageWindow, text="Este es el ataque de nivel 1", font="Helvetica 20 bold", bg="#65707F", fg="white")
     tit.pack(pady=50)
-    sub = Label(messageWindow, text="Listado de directorio", font="Helvetica 20", bg="black", fg="white")
+    sub = Label(messageWindow, text="Listado de directorio", font="Helvetica 20", bg="#65707F", fg="white")
     sub.pack(side=TOP)
 
     #Descomentar para agregar boton si no pasa ssh
@@ -31,7 +31,7 @@ def attack1(main_screen, ip, user, password, comm):
     #print(_stdout.read().decode())
     string = str(_stdout.read().decode())
     #print(type(string))
-    t = Label(messageWindow, text=string, bg="black", fg="white", font="Helvetica 12")
+    t = Label(messageWindow, text=string, bg="#65707F", fg="white", font="Helvetica 12")
     t.pack(side=TOP)
     client.close()
 

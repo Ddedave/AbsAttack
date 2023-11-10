@@ -25,8 +25,6 @@ comm="ls"
 
 
 
-
-
 def on_frame_configure(event):
     canvas.configure(scrollregion=canvas.bbox("all"))
 
@@ -53,10 +51,10 @@ photo = ImageTk.PhotoImage(im)
 
 main_screen.iconphoto(True, photo)
 
-main_screen.config(background="black")
+main_screen.config(background="#65707F")
 
 # Crear una ventana con scroll
-canvas = Canvas(main_screen, borderwidth=0, background="black")
+canvas = Canvas(main_screen, borderwidth=0, background="#65707F")
 vsb = Scrollbar(main_screen, orient="vertical", command=canvas.yview)
 hsb = Scrollbar(main_screen, orient="horizontal", command=canvas.xview)
 canvas.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
@@ -64,7 +62,7 @@ canvas.pack(side="left", fill="both", expand=True)
 vsb.pack(side="right", fill="y")
 hsb.pack(side="bottom", fill="x")
 
-frame = Frame(canvas, background="black")
+frame = Frame(canvas, background="#65707F")
 frame_id = canvas.create_window((4, 4), window=frame, anchor="nw")
 
 
@@ -75,8 +73,8 @@ canvas.bind("<Configure>", on_frame_configure)
 def def_attack1_wrapper():
     def_attack1(main_screen)
 
-defattack1 = tk.Button(frame, text="Defender ataque 1", bg="black", fg="white", command= def_attack1_wrapper)
-defattack1.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+defattack1 = tk.Button(frame, text="Defender ataque 1", bg="black", fg="white",  command= def_attack1_wrapper)
+defattack1.grid(row=0, column=0, padx=10, pady=10, sticky="nsew", )
 
 def def_attack2_wrapper():
     def_attack2(main_screen)
@@ -93,7 +91,7 @@ reset = tk.Button(frame, text="reiniciar", bg="black", fg="white")
 reset.grid(row=3, column=0, padx=10, pady=10, sticky="nsew")
 
 # Espacio de imagen
-image_label = Label(frame, image=photo, bg="black")
+image_label = Label(frame, image=photo, bg="#65707F")
 image_label.grid(row=0, column=1, rowspan=4, padx=10, pady=10, sticky="nsew")
 
 

@@ -23,12 +23,12 @@ def attack2(main_screen):
     messageWindow = Toplevel(main_screen)
     messageWindow.title("Ataque nivel 2")
     messageWindow.attributes('-fullscreen', True)  
-    messageWindow.config(background="black")
+    messageWindow.config(background="#65707F")
 
-    tit = Label(messageWindow, text="Este es el ataque de nivel 2", font="Helvetica 20 bold", bg="black", fg="white")
+    tit = Label(messageWindow, text="Este es el ataque de nivel 2", font="Helvetica 20 bold", bg="#65707F", fg="white")
     tit.pack(pady=50)
 
-    sub = Label(messageWindow, text="Ataque de Denegación de Servicio", font="Helvetica 20", bg="black", fg="white")
+    sub = Label(messageWindow, text="Ataque de Denegación de Servicio", font="Helvetica 20", bg="#65707F", fg="white")
     sub.pack()
 
     # Detener ataque
@@ -42,7 +42,7 @@ def attack2(main_screen):
     attack_thread = threading.Thread(target=syn_flood, args=(target_ip, target_port, stop_attack))
     attack_thread.start()
 
-    btn_back = Button(messageWindow, text="Detener Ataque y Regresar", font=12, height=4, width=30, bg="black", fg="white", command=on_closing)
-    btn_back.pack()
+    btn_back = Button(messageWindow, text="Detener Ataque y Regresar", font=12, height=4, width=30, bg="black", fg="white", command=on_closing).pack()
+    btn_back.grid(row=0,column=1,padx=10, pady=10, sticky="nsew")
 
     messageWindow.protocol("WM_DELETE_WINDOW", on_closing)

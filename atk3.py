@@ -11,10 +11,10 @@ def attack3(main_screen, user, password, ip):
     #messageWindow.geometry("860x560")
     #permite pantalla fullscreen
     messageWindow.attributes('-fullscreen', True)
-    messageWindow.config(background="black")
-    tit = Label(messageWindow, text="Este es el ataque de nivel 3", font="Helvetica 20 bold", bg="black", fg="white")
+    messageWindow.config(background="#65707F")
+    tit = Label(messageWindow, text="Este es el ataque de nivel 3", font="Helvetica 20 bold", bg="#65707F", fg="white")
     tit.pack(pady=50)
-    sub = Label(messageWindow, text="Explotación de vulernabilidad", font="Helvetica 20", bg="black", fg="white")
+    sub = Label(messageWindow, text="Explotación de vulernabilidad", font="Helvetica 20", bg="#65707F", fg="white")
     sub.pack(pady=30)
 
     #Descomentar para agregar boton si no pasa ssh
